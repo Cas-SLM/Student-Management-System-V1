@@ -1,33 +1,31 @@
 package za.co.cas;
 
 import java.util.*;
-import za.co.cas.Subject;
-import za.co.cas.Subject.*;
 
-public class Student {
+public class Student implements Runnable{
     private final String name;
-    private final String number;
+    private final String studentNumber;
+    private String id;
     private final Grade grades;
-    /*private double final_grade;
-    private ArrayList<String> subjects;
-    private Map<Subject, Double> marks;*/
 
     public Student(String fullName) {
         Random random = new Random();
         this.name = fullName;
+        this.id = "";
         ArrayList<String> student = new ArrayList<>(Arrays.asList(fullName.toLowerCase().strip().split(" ")));
-        StringBuilder number = new StringBuilder();
-        number.append(student.getFirst().toUpperCase(), 0, 2)
-                .append(String.format("%d", random.nextInt(111, 1000)))
-                .append(student.getLast().toUpperCase(), 0, 2)
-                .append(String.format("%d", random.nextInt(111, 1000)));
-        this.number = number.toString();
-        grades = new Grade();
-        grades.randomSubjects(7);
-
+        this.studentNumber = student.getFirst().toUpperCase().substring(0, 2) +
+                String.format("%d", random.nextInt(111, 1000)) +
+                student.getLast().toUpperCase().substring(0, 2) +
+                String.format("%d", random.nextInt(111, 1000));
+        grades = new Grade(this.name);
     }
 
+    @Override
+    public void run() {
+        StudFrame frame = new StudFrame(grades);
+        frame.setVisible(true);
+    }
     public static void main(String[] args) {
+        new Student("Riri Momo").run();
     }
-
 }
