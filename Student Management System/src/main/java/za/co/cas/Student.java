@@ -7,6 +7,8 @@ public class Student implements Runnable{
     private final String studentNumber;
     private String id;
     private final Grade grades;
+    private Manager manager;
+    private boolean done;
 
     public Student(String fullName) {
         Random random = new Random();
@@ -18,12 +20,31 @@ public class Student implements Runnable{
                 student.getLast().toUpperCase().substring(0, 2) +
                 String.format("%d", random.nextInt(111, 1000));
         grades = new Grade(this.name);
+        done = false;
+    }
+
+    public Student(Manager manager, String fullName) {
+        this(fullName);
+        this.manager = manager;
+    }
+
+    public void done() {
+        done = true;
     }
 
     @Override
     public void run() {
-        StudFrame frame = new StudFrame(grades);
+        StudFrame frame = new StudFrame(this, grades, name);
         frame.setVisible(true);
+        while (!done) {
+            try {
+                //noinspection BusyWait
+                Thread.sleep(500);
+            } catch (InterruptedException ignored) {
+//                System.out.println(ignored.getMessage());
+            }
+        }
+        Manager.showFrame(manager);
     }
     public static void main(String[] args) {
         new Student("Riri Momo").run();

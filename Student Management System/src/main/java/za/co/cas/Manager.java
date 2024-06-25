@@ -8,35 +8,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Manager extends JFrame {
-    ArrayList<Student> Students = new ArrayList<>(){{
-        Student student = new Student("Riri Momo");
-        student.run();
-        add(student);
-
-    }};
+    ArrayList<Student> Students = new ArrayList<>();
     public Manager() {
         setTitle("Student Manager");
-        setSize(500, 600);
+        setMinimumSize(new Dimension(500, 500));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        /*JTextField nameInput = new JTextField("", 30);*/
         JTextField searchInput = new JTextField("", 30);
+
         JButton addStudent = new JButton("Add");
-        addStudent.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO Run student addition fame and hide this one
-            }
-        });
+
         JButton removeStudent = new JButton("Remove");
         JButton editStudent = new JButton("Edit");
         JButton searchStudent = new JButton("Search");
 
-        JPanel searchPanel = new JPanel(new BorderLayout());
-        searchPanel.setSize(500, 50);
+        JPanel searchPanel = new JPanel() {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(super.getPreferredSize().width, 60);
+            }
+        };
+        searchPanel.setLayout(new BorderLayout());
         searchPanel.add(new JLabel("Search"), BorderLayout.WEST);
-        searchPanel.add(searchInput, BorderLayout.EAST);
+        searchPanel.add(searchInput, BorderLayout.CENTER);
         searchPanel.add(searchStudent, BorderLayout.SOUTH);
 
 
@@ -46,15 +41,25 @@ public class Manager extends JFrame {
         ctrlBtnPnl.add(editStudent);
         String[] column = {"Number", "Name", "Grade", "Average"};
         ArrayList<ArrayList<String>> dataArr = new ArrayList<>() {{
-            add(new ArrayList<>(Arrays.asList("1234","Riri Momo", "4.5", "90%")));
-            add(new ArrayList<>(Arrays.asList("1235","Siri Nomo", "4.0", "80%")));
+            add(new ArrayList<>(Arrays.asList("0","Riri Momo", "4.5", "90%")));
+            add(new ArrayList<>(Arrays.asList("1","Siri Nomo", "4.0", "80%")));
         }};
 
         JTable studentTable = new JTable(getData(dataArr), column);
 
+        addStudent.addActionListener(e -> {
+            hideFrame(this);
+            String name = JOptionPane.showInputDialog("Enter students name");
+            Student student = new Student(this, name);
+            Thread gradesWindow = new Thread(student);
+            gradesWindow.start();
+            Students.add(student);
+        });
+
+        JScrollPane scrollPane = new JScrollPane(studentTable);
         setLayout(new BorderLayout());
-        add(searchPanel, BorderLayout.NORTH);
-        add(new JScrollPane(studentTable));
+        add(scrollPane, BorderLayout.NORTH);
+        add(searchPanel);
         add(ctrlBtnPnl, BorderLayout.SOUTH);
 
     }
@@ -66,6 +71,14 @@ public class Manager extends JFrame {
             data[i++] = list.toArray(new String[0]);
         }
         return data;
+    }
+
+    private static void hideFrame(Manager mnger) {
+        mnger.setVisible(false);
+    }
+
+    public static void showFrame(Manager mnger) {
+        mnger.setVisible(true);
     }
 
     public static void main(String[] args) {

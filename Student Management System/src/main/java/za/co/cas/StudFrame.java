@@ -74,6 +74,7 @@ class StudFrame extends JFrame {
                 }
             }
             frame.dispose();
+            student.done();
         });
         done.setSize(50, 30);
         return done;
