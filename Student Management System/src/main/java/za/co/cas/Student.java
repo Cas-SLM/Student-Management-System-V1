@@ -32,6 +32,10 @@ public class Student implements Runnable{
         done = true;
     }
 
+    public boolean takesSubject(Subject subject) {
+        return grades.hasSubject(subject);
+    }
+
     @Override
     public void run() {
         StudFrame frame = new StudFrame(this, grades, name);
@@ -48,5 +52,9 @@ public class Student implements Runnable{
     }
     public static void main(String[] args) {
         new Student("Riri Momo").run();
+    }
+
+    public int getMark(Subject subject) {
+        return grades.getMark(subject);
     }
 }

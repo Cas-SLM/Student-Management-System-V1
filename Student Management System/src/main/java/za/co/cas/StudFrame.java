@@ -40,6 +40,7 @@ class StudFrame extends JFrame {
                     JSpinner spinner = getSpinner(key, grades);
                     subjectCheckBox.put(key, checkbox);
                     subjectSpinner.put(key, spinner);
+                    preset(key, spinner, checkbox);
                     add(subjectCheckBox.get(key), BorderLayout.WEST);
                     add(subjectSpinner.get(key), BorderLayout.EAST);
                 }};
@@ -78,6 +79,14 @@ class StudFrame extends JFrame {
         });
         done.setSize(50, 30);
         return done;
+    }
+
+    private void preset(Subject key, JSpinner spinner, JCheckBox checkBox) {
+        if (student != null && student.takesSubject(key)) {
+            spinner.setValue(student.getMark(key));
+            checkBox.setSelected(true);
+        }
+
     }
 
     private JSpinner getSpinner(Subject subject, Grade grades) {

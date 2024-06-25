@@ -74,11 +74,13 @@ public class Manager extends JFrame {
     }
 
     private static void hideFrame(Manager mnger) {
-        mnger.setVisible(false);
+        if (mnger != null)
+            mnger.setVisible(false);
     }
 
     public static void showFrame(Manager mnger) {
-        mnger.setVisible(true);
+        if (mnger != null)
+            mnger.setVisible(true);
     }
 
     public static void main(String[] args) {
