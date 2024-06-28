@@ -4,28 +4,42 @@ import java.util.*;
 
 public class Student implements Runnable{
     private final String name;
-    private final String studentNumber;
-    private String id;
+//    private final String number;
+    private final String id;
     private final Grade grades;
+//    private final Mapper mapper;
     private Manager manager;
     private boolean done;
 
     public Student(String fullName) {
         Random random = new Random();
         this.name = fullName;
-        this.id = "";
-        ArrayList<String> student = new ArrayList<>(Arrays.asList(fullName.toLowerCase().strip().split(" ")));
-        this.studentNumber = student.getFirst().toUpperCase().substring(0, 2) +
+        this.id = null;
+        /*ArrayList<String> student = new ArrayList<>(Arrays.asList(fullName.toLowerCase().strip().split(" ")));
+        this.number = student.getFirst().toUpperCase().substring(0, 2) +
                 String.format("%d", random.nextInt(111, 1000)) +
                 student.getLast().toUpperCase().substring(0, 2) +
-                String.format("%d", random.nextInt(111, 1000));
-        grades = new Grade(this.name);
+                String.format("%d", random.nextInt(111, 1000));*/
+//        grades = new Grade(this.name);
+        grades = new Grade();
         done = false;
     }
 
     public Student(Manager manager, String fullName) {
         this(fullName);
         this.manager = manager;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Grade getGrades() {
+        return grades;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void done() {
@@ -45,16 +59,16 @@ public class Student implements Runnable{
                 //noinspection BusyWait
                 Thread.sleep(500);
             } catch (InterruptedException ignored) {
-//                System.out.println(ignored.getMessage());
             }
         }
         Manager.showFrame(manager);
     }
+
     public static void main(String[] args) {
         new Student("Riri Momo").run();
     }
 
-    public int getMark(Subject subject) {
+    public int mark(Subject subject) {
         return grades.getMark(subject);
     }
 }

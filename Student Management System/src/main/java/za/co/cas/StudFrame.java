@@ -15,7 +15,7 @@ class StudFrame extends JFrame {
 
     public StudFrame(Grade grades, String name) {
         setTitle("Student - %s".formatted(name));
-        setSize(550, 260);
+        setSize(750, 420);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -31,7 +31,7 @@ class StudFrame extends JFrame {
         }};
 
         JPanel subjects = new JPanel() {{
-            setLayout(new GridLayout(9, 2, 0, 0));
+            setLayout(new GridLayout(15, 2, 0, 0));
             for (Subject key : subjectCheckBox.keySet()) {
                 JPanel subject = new JPanel() {{
                     setLayout(new BorderLayout());
@@ -76,6 +76,7 @@ class StudFrame extends JFrame {
             }
             frame.dispose();
             student.done();
+            System.out.println(this.getSize());
         });
         done.setSize(50, 30);
         return done;
@@ -83,7 +84,7 @@ class StudFrame extends JFrame {
 
     private void preset(Subject key, JSpinner spinner, JCheckBox checkBox) {
         if (student != null && student.takesSubject(key)) {
-            spinner.setValue(student.getMark(key));
+            spinner.setValue(student.mark(key));
             checkBox.setSelected(true);
         }
 
@@ -105,7 +106,6 @@ class StudFrame extends JFrame {
         textField.addActionListener(e -> {
             if (subjectSpinner.get(subject) != null) {
                 grades.addMark(subject, (int) subjectSpinner.get(subject).getValue());
-                System.out.println(grades.tabulate());
             }
         });
 
@@ -114,7 +114,6 @@ class StudFrame extends JFrame {
 
         spinner.addChangeListener(e -> {
             grades.addMark(subject, (int) ((JSpinner) e.getSource()).getValue());
-            System.out.println(grades.tabulate());
         });
         return spinner;
     }
@@ -127,7 +126,6 @@ class StudFrame extends JFrame {
             } else {
                 grades.removeSubject(key);
             }
-            System.out.println(grades.tabulate());
         });
         return checkbox;
     }

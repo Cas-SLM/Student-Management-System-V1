@@ -1,19 +1,25 @@
 package za.co.cas;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class Manager extends JFrame {
-    ArrayList<Student> Students = new ArrayList<>();
+    ArrayList<Student> Students;// = new ArrayList<>();
+    DataManager dataManager = new DataManager();
+    DefaultTableModel tblModel;
     public Manager() {
         setTitle("Student Manager");
         setMinimumSize(new Dimension(500, 500));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        Students = dataManager.read();
 
         JTextField searchInput = new JTextField("", 30);
 
@@ -39,13 +45,12 @@ public class Manager extends JFrame {
         ctrlBtnPnl.add(addStudent);
         ctrlBtnPnl.add(removeStudent);
         ctrlBtnPnl.add(editStudent);
-        String[] column = {"Number", "Name", "Grade", "Average"};
-        ArrayList<ArrayList<String>> dataArr = new ArrayList<>() {{
-            add(new ArrayList<>(Arrays.asList("0","Riri Momo", "4.5", "90%")));
-            add(new ArrayList<>(Arrays.asList("1","Siri Nomo", "4.0", "80%")));
-        }};
+        String[] column = {"Number", "Name", "Grade", "Average", "Subjects"};
 
-        JTable studentTable = new JTable(getData(dataArr), column);
+        tblModel = new DefaultTableModel();
+
+        JTable studentTable = new JTable(tblModel);
+        tblModel.setColumnIdentifiers(column);
 
         addStudent.addActionListener(e -> {
             hideFrame(this);
@@ -54,6 +59,8 @@ public class Manager extends JFrame {
             Thread gradesWindow = new Thread(student);
             gradesWindow.start();
             Students.add(student);
+            dataManager.write(Students);
+            loadTableData(Students);
         });
 
         JScrollPane scrollPane = new JScrollPane(studentTable);
@@ -64,13 +71,14 @@ public class Manager extends JFrame {
 
     }
 
-    private static String[][] getData(ArrayList<ArrayList<String>> dataArr) {
-        String[][] data = new String[dataArr.size()][];
-        int i = 0;
-        for (ArrayList<String> list : dataArr) {
-            data[i++] = list.toArray(new String[0]);
+    private void loadTableData(ArrayList<Student> students) {
+        tblModel.setRowCount(0);
+        int i = 1;
+        for (Student student : students) {
+            Object[] row = {i, student.getName(), student.getGrades().getGrade(), student.getGrades().getAverage(), student.getGrades().getSubjects()};
+            tblModel.addRow(row);
+            i++;
         }
-        return data;
     }
 
     private static void hideFrame(Manager mnger) {
@@ -86,5 +94,29 @@ public class Manager extends JFrame {
     public static void main(String[] args) {
         Manager mng = new Manager();
         mng.setVisible(true);
+    }
+
+    class DataManager extends Mapper{
+
+        public DataManager() {
+            super("/home/cas/Documents/CODSOFT/Student Management System/src/main/java/za/co/cas/Students.json");
+        }
+
+        public ArrayList<Student> read() {
+            ArrayList<Student> out;
+            try {
+                out = mapper.readValue(FILE, new TypeReference<ArrayList<Student>>() {});
+            } catch (IOException e) {
+                out = new ArrayList<>();
+            }
+            return out;
+        }
+
+        public void write(ArrayList<Student> students) {
+            try {
+                mapper.writeValue(FILE, students);
+            } catch (IOException ignored) {
+            }
+        }
     }
 }
