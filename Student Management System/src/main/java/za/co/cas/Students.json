@@ -1,1 +1,19 @@
-[{"name":"Riri Momo","id":null,"grades":{"subjects":[],"average":0.0,"grade":0.0,"sum":0.0,"total":0.0,"subjectsAndMarks":{}}}]
+[ {
+  "name" : "Riri momo",
+  "id" : "",
+  "grades" : {
+    "subjectsAndMarks" : {
+      "CONSUMER_STUDIES" : 50,
+      "ACCOUNTING" : 50,
+      "PHYSICAL_SCIENCE" : 50,
+      "ROBOTICS" : 50,
+      "GEOGRAPHY" : 50,
+      "MATHEMATICS" : 50
+    },
+    "average" : 50.0,
+    "grade" : 2.5,
+    "sum" : 300.0,
+    "total" : 600.0
+  },
+  "done" : true
+} ]

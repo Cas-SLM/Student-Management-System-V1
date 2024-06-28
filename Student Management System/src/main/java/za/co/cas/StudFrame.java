@@ -49,7 +49,7 @@ class StudFrame extends JFrame {
         }};
 
         JPanel doneBtn = new JPanel();
-        JButton done = getjButton(this, grades);
+        JButton done = getDoneButton(this, grades);
         doneBtn.add(done);
 
         setLayout(new BorderLayout());
@@ -63,7 +63,7 @@ class StudFrame extends JFrame {
         this.student = student;
     }
 
-    private JButton getjButton(StudFrame frame, Grade grades) {
+    private JButton getDoneButton(StudFrame frame, Grade grades) {
         JButton done = new JButton("Done");
 
         done.addActionListener(e -> {
@@ -76,7 +76,6 @@ class StudFrame extends JFrame {
             }
             frame.dispose();
             student.done();
-            System.out.println(this.getSize());
         });
         done.setSize(50, 30);
         return done;

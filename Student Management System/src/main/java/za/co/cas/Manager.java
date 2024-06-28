@@ -7,10 +7,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Manager extends JFrame {
-    ArrayList<Student> Students;// = new ArrayList<>();
+    ArrayList<Student> Students;
     DataManager dataManager = new DataManager();
     DefaultTableModel tblModel;
     public Manager() {
@@ -58,9 +57,23 @@ public class Manager extends JFrame {
             Student student = new Student(this, name);
             Thread gradesWindow = new Thread(student);
             gradesWindow.start();
-            Students.add(student);
-            dataManager.write(Students);
-            loadTableData(Students);
+            Thread windowVisibility = new Thread( new Runnable() {
+                @Override
+                public void run() {
+                    while (!student.isDone()) {
+                        try {
+                            //noinspection BusyWait
+                            Thread.sleep(500);
+                        } catch (InterruptedException ignored) {
+                        }
+                    }
+                    Students.add(student);
+                    dataManager.write(Students);
+                    loadTableData(Students);
+                    showFrame(Manager.this);
+                }
+            });
+            windowVisibility.start();
         });
 
         JScrollPane scrollPane = new JScrollPane(studentTable);
@@ -69,26 +82,28 @@ public class Manager extends JFrame {
         add(searchPanel);
         add(ctrlBtnPnl, BorderLayout.SOUTH);
 
+        loadTableData(Students);
+
     }
 
     private void loadTableData(ArrayList<Student> students) {
         tblModel.setRowCount(0);
         int i = 1;
         for (Student student : students) {
-            Object[] row = {i, student.getName(), student.getGrades().getGrade(), student.getGrades().getAverage(), student.getGrades().getSubjects()};
+            Object[] row = {i, student.getName(), student.getGrades().getGrade(), student.getGrades().getAverage(), student.getGrades().Subjects()};
             tblModel.addRow(row);
             i++;
         }
     }
 
-    private static void hideFrame(Manager mnger) {
-        if (mnger != null)
-            mnger.setVisible(false);
+    private static void hideFrame(Manager manager) {
+        if (manager != null)
+            manager.setVisible(false);
     }
 
-    public static void showFrame(Manager mnger) {
-        if (mnger != null)
-            mnger.setVisible(true);
+    public static void showFrame(Manager manager) {
+        if (manager != null)
+            manager.setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -108,13 +123,14 @@ public class Manager extends JFrame {
                 out = mapper.readValue(FILE, new TypeReference<ArrayList<Student>>() {});
             } catch (IOException e) {
                 out = new ArrayList<>();
+                throw new RuntimeException(e);
             }
             return out;
         }
 
         public void write(ArrayList<Student> students) {
             try {
-                mapper.writeValue(FILE, students);
+                mapper.writerWithDefaultPrettyPrinter().writeValue(FILE, students);
             } catch (IOException ignored) {
             }
         }
