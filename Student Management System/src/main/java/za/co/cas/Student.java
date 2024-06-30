@@ -6,25 +6,19 @@ public class Student implements Runnable{
     private String name;
     private String id;
     private Grade grades;
-    private Manager manager;
+//    private Manager manager;
     private boolean done;
 
     public Student(String fullName) {
         this.name = fullName;
         this.id = null;
-        /*ArrayList<String> student = new ArrayList<>(Arrays.asList(fullName.toLowerCase().strip().split(" ")));
-        this.number = student.getFirst().toUpperCase().substring(0, 2) +
-                String.format("%d", random.nextInt(111, 1000)) +
-                student.getLast().toUpperCase().substring(0, 2) +
-                String.format("%d", random.nextInt(111, 1000));
-        grades = new Grade(this.name);*/
         grades = new Grade();
         done = false;
     }
 
     public Student(Manager manager, String fullName) {
         this(fullName);
-        this.manager = manager;
+//        this.manager = manager;
     }
 
     public String getName() {
@@ -55,6 +49,10 @@ public class Student implements Runnable{
         done = true;
     }
 
+    public void setDone(boolean bool) {
+        done = bool;
+    }
+
     public boolean isDone() {
         return done;
     }
@@ -67,7 +65,6 @@ public class Student implements Runnable{
     public void run() {
         StudFrame frame = new StudFrame(this, grades, name);
         frame.setVisible(true);
-//        Manager.showFrame(manager);
     }
 
     public static void main(String[] args) {

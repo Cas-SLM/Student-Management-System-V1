@@ -1,18 +1,48 @@
 [ {
-  "name" : "Riri momo",
-  "id" : "",
+  "name" : "Riri Momo",
+  "id" : null,
   "grades" : {
     "subjectsAndMarks" : {
-      "CONSUMER_STUDIES" : 50,
-      "ACCOUNTING" : 50,
-      "PHYSICAL_SCIENCE" : 50,
-      "ROBOTICS" : 50,
-      "GEOGRAPHY" : 50,
-      "MATHEMATICS" : 50
+      "FIRST_ADDITIONAL_LANGUAGE" : 95,
+      "HOME_LANGUAGE" : 99,
+      "INFORMATION_TECHNOLOGY" : 92,
+      "SECOND_ADDITIONAL_LANGUAGE" : 90,
+      "PHYSICAL_SCIENCE" : 96
     },
-    "average" : 50.0,
-    "grade" : 2.5,
-    "sum" : 300.0,
+    "average" : 94.4,
+    "grade" : 4.720000000000001,
+    "sum" : 472.0,
+    "total" : 500.0
+  },
+  "done" : true
+}, {
+  "name" : "Max Pain",
+  "id" : null,
+  "grades" : {
+    "subjectsAndMarks" : {
+      "HISTORY" : 0
+    },
+    "average" : 0.0,
+    "grade" : 0.0,
+    "sum" : 0.0,
+    "total" : 100.0
+  },
+  "done" : true
+}, {
+  "name" : "Simi Lolo",
+  "id" : null,
+  "grades" : {
+    "subjectsAndMarks" : {
+      "LIFE_SCIENCES" : 0,
+      "HOME_LANGUAGE" : 0,
+      "GEOGRAPHY" : 0,
+      "MATHEMATICS" : 0,
+      "INFORMATION_TECHNOLOGY" : 0,
+      "ENGINEERING_GRAPHICS_AND_DESIGN" : 0
+    },
+    "average" : 0.0,
+    "grade" : 0.0,
+    "sum" : 0.0,
     "total" : 600.0
   },
   "done" : true
