@@ -3,10 +3,10 @@
   "id" : null,
   "grades" : {
     "subjectsAndMarks" : {
+      "HOME_LANGUAGE" : 99,
+      "FIRST_ADDITIONAL_LANGUAGE" : 95,
       "SECOND_ADDITIONAL_LANGUAGE" : 90,
       "INFORMATION_TECHNOLOGY" : 92,
-      "FIRST_ADDITIONAL_LANGUAGE" : 95,
-      "HOME_LANGUAGE" : 99,
       "PHYSICAL_SCIENCE" : 96
     },
     "average" : 94.4,
@@ -31,12 +31,12 @@
   "id" : null,
   "grades" : {
     "subjectsAndMarks" : {
+      "HOME_LANGUAGE" : 49,
       "INFORMATION_TECHNOLOGY" : 0,
       "ENGINEERING_GRAPHICS_AND_DESIGN" : 0,
-      "HOME_LANGUAGE" : 49,
-      "GEOGRAPHY" : 53,
       "MATHEMATICS" : 42,
-      "LIFE_SCIENCES" : 55
+      "LIFE_SCIENCES" : 55,
+      "GEOGRAPHY" : 53
     },
     "average" : 33.166666666666664,
     "grade" : 1.6583333333333332,
@@ -48,34 +48,32 @@
   "name" : "Jeff Raphael",
   "id" : null,
   "grades" : {
-    "subjectsAndMarks" : { },
-    "average" : 0.0,
-    "grade" : 0.0,
-    "sum" : 0.0,
-    "total" : 0.0
-  },
-  "done" : true
-}, {
-  "name" : "Delete Later",
-  "id" : null,
-  "grades" : {
     "subjectsAndMarks" : {
-      "CONSUMER_STUDIES" : 99,
-      "SECOND_ADDITIONAL_LANGUAGE" : 99,
-      "ACCOUNTING" : 99,
-      "CHEMISTRY" : 99,
-      "HOSPITALITY" : 99,
-      "ELECTRICAL_SCIENCE" : 99,
-      "MUSIC" : 99,
-      "PHYSICAL_SCIENCE" : 99,
-      "GEOGRAPHY" : 99,
-      "TECHNICAL_SCIENCE" : 99,
-      "LIFE_SCIENCES" : 99
+      "MATHEMATICS" : 99
     },
     "average" : 99.0,
     "grade" : 4.95,
-    "sum" : 1089.0,
-    "total" : 1100.0
+    "sum" : 99.0,
+    "total" : 100.0
+  },
+  "done" : true
+}, {
+  "name" : "Lola Kennedy",
+  "id" : null,
+  "grades" : {
+    "subjectsAndMarks" : {
+      "HOME_LANGUAGE" : 50,
+      "CHEMISTRY" : 60,
+      "FIRST_ADDITIONAL_LANGUAGE" : 80,
+      "SECOND_ADDITIONAL_LANGUAGE" : 71,
+      "INFORMATION_TECHNOLOGY" : 70,
+      "PHYSICAL_SCIENCE" : 45,
+      "MATHEMATICS" : 76
+    },
+    "average" : 64.57142857142857,
+    "grade" : 3.2285714285714286,
+    "sum" : 452.0,
+    "total" : 700.0
   },
   "done" : true
 } ]

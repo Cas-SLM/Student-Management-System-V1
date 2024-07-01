@@ -277,13 +277,4 @@ public class Manager extends JFrame {
             }
         }
     }
-
-    /*/*
-     * Main method to launch the application.
-     * @param args Command line arguments.
-     */
-    /*public static void main(String[] args) {
-        Manager mng = new Manager();
-        mng.setVisible(true);
-    }*/
 }

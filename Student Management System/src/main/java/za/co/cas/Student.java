@@ -85,8 +85,4 @@ public class Student implements Runnable{
         StudFrame frame = new StudFrame(this, grades, name);
         frame.setVisible(true);
     }
-
-    /*public static void main(String[] args) {
-        new Student("Riri Momo").run();
-    }*/
 }

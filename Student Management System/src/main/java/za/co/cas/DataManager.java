@@ -92,62 +92,7 @@ public class DataManager extends Mapper {
             studentList = new ArrayList<>(); // Return an empty list on error
         }
         return studentList;
-        //NOTE GPT version with better error handling
-        /*ArrayList<Student> studentList = new ArrayList<>();
-        try {
-            // Read JSON data from the file into a list of HashMaps
-            List<HashMap<String, Object>> jsonList = mapper.readValue(FILE, mapper.getTypeFactory().constructCollectionType(List.class, HashMap.class));
-
-            // Convert each HashMap to a Student object
-            for (HashMap<String, Object> studentMap : jsonList) {
-                Student student = mapToStudent(studentMap);
-                if (student != null) {
-                    studentList.add(student);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle or log the exception appropriately
-        }
-        return studentList;*/
     }
-
-    //NOTE GPT version with better error handling
-    /*private Student mapToStudent(HashMap<String, Object> studentMap) {
-        String name = (String) studentMap.get("name");
-        if (name == null) {
-            return null; // or throw an exception if name is required
-        }
-
-        Student student = new Student(name);
-
-        // Set other properties of the Student object
-        if (studentMap.containsKey("grades")) {
-            Object gradesObj = studentMap.get("grades");
-            if (gradesObj instanceof HashMap) {
-                @SuppressWarnings("unchecked")
-                HashMap<String, Object> gradesMap = (HashMap<String, Object>) gradesObj;
-                Grade grade = new Grade();
-                // Populate Grade object from gradesMap
-                if (gradesMap.containsKey("subjectsAndMarks") && gradesMap.get("subjectsAndMarks") instanceof HashMap) {
-                    @SuppressWarnings("unchecked")
-                    HashMap<String, Integer> subjectsAndMarks = (HashMap<String, Integer>) gradesMap.get("subjectsAndMarks");
-                    grade.setSubjectsAndMarks(subjectsAndMarks);
-                }
-                student.setGrades(grade);
-            }
-        }
-
-        if (studentMap.containsKey("id")) {
-            String id = (String) studentMap.get("id");
-            student.setId(id);
-        }
-
-        if (studentMap.containsKey("done")) {
-            boolean done = (boolean) studentMap.get("done");
-            student.setDone(done);
-        }
-
-        return student;*/
 
     /**
      * Writes the list of students to a JSON file.
