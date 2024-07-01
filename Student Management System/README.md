@@ -7,7 +7,7 @@ A GUI based Student Management System that is built with Java and Java Swing.
 The app allows users to add, remove, search and edit student information
 
 ## Requirements
-1. Java 21 or higher
+1. [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) or higher
 2. Latest version of [Maven](https://maven.apache.org/download.cgi)
 
 ## Installation

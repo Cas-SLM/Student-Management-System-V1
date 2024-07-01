@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import static za.co.cas.SP.sp;
+
 /**
  * DataManager handles reading and writing student data from/to a JSON file.
  * It extends the Mapper class to utilize JSON parsing and file handling.
@@ -18,7 +20,7 @@ public class DataManager extends Mapper {
      * Constructor that sets the file path for storing student data.
      */
     public DataManager() {
-        super("/home/cas/Documents/CODSOFT/Student Management System/src/main/java/za/co/cas/Students.json");
+        super(System.getProperty("user.dir")+sp()+"Student Management System"+sp()+"src"+sp() +"main"+sp() +"java"+sp() +"za"+sp() +"co"+sp() +"cas"+sp()+"Students.json");
     }
 
     /**
